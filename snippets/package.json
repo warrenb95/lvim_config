@@ -1,0 +1,15 @@
+{
+  "name": "nvim-snippets",
+  "author": "Warren Brown",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": "go",
+        "path": "./go.json"
+      }
+    ]
+  }
+}

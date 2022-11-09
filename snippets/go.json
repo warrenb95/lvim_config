@@ -1,0 +1,35 @@
+{
+  "generate test map": {
+    "prefix": "maptest",
+    "body": [
+      "func Test$1(t *testing.T) {",
+      "\tt.Parallel()",
+      "\t// Config",
+      "",
+      "\t// Test Cases",
+      "\ttests := map[string]struct {",
+      "\t\terrContains string",
+      "\t}{",
+      "\t\t\"pass\": {},",
+      "\t}",
+      "",
+      "\t// Testing",
+      "\tfor name, test := range tests {",
+      "\t\ttest := test",
+      "\t\tt.Run(name, func(t *testing.T) {",
+      "\t\t\tt.Parallel()",
+      "\t\t\tvar err error",
+      "\t\t\tif test.errContains != \"\" {",
+      "\t\t\t\trequire.Error(t, err)",
+      "\t\t\t\tassert.Contains(t, err.Error(), test.errContains)",
+      "\t\t\t\treturn",
+      "\t\t\t}",
+      "\t\t\trequire.NoError(t, err)",
+      "\t\t})",
+      "\t}",
+      "}",
+      ""
+    ],
+    "description": "generate a test map"
+  }
+}
