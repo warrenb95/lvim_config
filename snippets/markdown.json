@@ -1,0 +1,16 @@
+{
+  "code task": {
+    "prefix": "codetask",
+    "body": [
+      "* [ ] $1",
+      "\t* [ ] code",
+      "\t* [ ] test",
+      "\t* [ ] mr",
+      "\t* [ ] reviewed",
+      "\t* [ ] merged",
+      "\t* [ ] tested on INT",
+      ""
+    ],
+    "description": "generate a coding task"
+  }
+}

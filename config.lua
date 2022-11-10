@@ -1,4 +1,3 @@
-local dap = require "dap"
 --[[
 lvim is the global options object
 
@@ -15,6 +14,7 @@ lvim.format_on_save.enabled = true
 lvim.colorscheme = "terrafox"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
+--
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -175,45 +175,49 @@ lvim.builtin.treesitter.highlight.enable = true
 lvim.plugins = {
   { "EdenEast/nightfox.nvim" },
   { "vimwiki/vimwiki" },
+  { "leoluz/nvim-dap-go" },
 }
 
 -- vimwiki
 vim.g.vimwiki_list = { { path = "~/vimwiki/", syntax = "markdown", ext = ".md" } }
 
 -- Debugger
-dap.adapters.delve = {
-  type = 'server',
-  port = '${port}',
-  executable = {
-    command = 'dlv',
-    args = { 'dap', '-l', '127.0.0.1:${port}' },
-  }
-}
+pcall(require("dap-go").setup())
 
--- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
-dap.configurations.go = {
-  {
-    type = "delve",
-    name = "Debug",
-    request = "launch",
-    program = "${file}"
-  },
-  {
-    type = "delve",
-    name = "Debug test", -- configuration for debugging test files
-    request = "launch",
-    mode = "test",
-    program = "${file}"
-  },
-  -- works with go.mod packages and sub packages
-  {
-    type = "delve",
-    name = "Debug test (go.mod)",
-    request = "launch",
-    mode = "test",
-    program = "./${relativeFileDirname}"
-  }
-}
+
+-- dap.adapters.delve = {
+--   type = 'server',
+--   port = '${port}',
+--   executable = {
+--     command = 'dlv',
+--     args = { 'dap', '-l', '127.0.0.1:${port}' },
+--   }
+-- }
+
+-- -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+-- dap.configurations.go = {
+--   {
+--     type = "delve",
+--     name = "Debug",
+--     request = "launch",
+--     program = "${file}"
+--   },
+--   {
+--     type = "delve",
+--     name = "Debug test", -- configuration for debugging test files
+--     request = "launch",
+--     mode = "test",
+--     program = "${file}"
+--   },
+--   -- works with go.mod packages and sub packages
+--   {
+--     type = "delve",
+--     name = "Debug test (go.mod)",
+--     request = "launch",
+--     mode = "test",
+--     program = "./${relativeFileDirname}"
+--   }
+-- }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- vim.api.nvim_create_autocmd("BufEnter", {
