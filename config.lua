@@ -61,20 +61,15 @@ lvim.builtin.telescope.defaults.mappings = {
 --   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 -- }
 --
-lvim.builtin.which_key.mappings["v"] = {
-  name = "Vimwiki",
-  i = { "<CMD>VimwikiIndex<CR>", "Index" },
-  t = { "<CMD>VimwikiMakeDiaryNote<CR>", "Today's Diary Page" },
-  v = { "<CMD>VimwikiDiaryIndex<CR>", "Yesterday's Diary Page" },
-}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
+lvim.builtin.terminal.direction = "vertical"
+lvim.builtin.terminal.size = vim.o.columns * 0.4
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -182,42 +177,32 @@ lvim.plugins = {
 vim.g.vimwiki_list = { { path = "~/vimwiki/", syntax = "markdown", ext = ".md" } }
 
 -- Debugger
+-- https://github.com/leoluz/nvim-dap-go
 pcall(require("dap-go").setup())
 
+lvim.builtin.which_key.mappings["d"]["s"] = { "<cmd>lua require('dap-go').debug_test()<cr>", "Start" }
 
--- dap.adapters.delve = {
---   type = 'server',
---   port = '${port}',
---   executable = {
---     command = 'dlv',
---     args = { 'dap', '-l', '127.0.0.1:${port}' },
---   }
+-- = {
+--   name = "Debug",
+--   t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+--   b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
+--   c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
+--   C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
+--   d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
+--   g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
+--   i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
+--   o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
+--   u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
+--   p = { "<cmd>lua require'dap'.pause()<cr>", "Pause" },
+--   r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
+--   s = { "<cmd>lua require('dap-go').debug_test()<cr>", "Start" },
+--   q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
+--   U = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle UI" },
 -- }
 
--- -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
--- dap.configurations.go = {
---   {
---     type = "delve",
---     name = "Debug",
---     request = "launch",
---     program = "${file}"
---   },
---   {
---     type = "delve",
---     name = "Debug test", -- configuration for debugging test files
---     request = "launch",
---     mode = "test",
---     program = "${file}"
---   },
---   -- works with go.mod packages and sub packages
---   {
---     type = "delve",
---     name = "Debug test (go.mod)",
---     request = "launch",
---     mode = "test",
---     program = "./${relativeFileDirname}"
---   }
--- }
+-- Toggle term
+lvim.builtin.terminal.size = vim.o.columns * 0.4
+lvim.builtin.terminal.direction = "verticle"
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- vim.api.nvim_create_autocmd("BufEnter", {

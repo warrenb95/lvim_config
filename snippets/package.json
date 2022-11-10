@@ -11,8 +11,8 @@
         "path": "./go.json"
       },
       {
-        "language": "md",
-        "path": "./markdown.json"
+        "language": "vimwiki",
+        "path": "./vimwiki.json"
       }
     ]
   }
