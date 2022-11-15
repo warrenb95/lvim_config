@@ -3,8 +3,9 @@
     "prefix": "codetask",
     "body": [
       "* [ ] $1",
+      "\t* [ ] started",
       "\t* [ ] code",
-      "\t* [ ] test",
+      "\t* [ ] unit tests",
       "\t* [ ] mr",
       "\t* [ ] reviewed",
       "\t* [ ] merged",
@@ -12,5 +13,35 @@
       ""
     ],
     "description": "generate a coding task"
+  },
+  "proto task": {
+    "prefix": "prototask",
+    "body": [
+      "* [ ] $1",
+      "\t* [ ] started",
+      "\t* [ ] define protos",
+      "\t* [ ] mr",
+      "\t* [ ] reviewed",
+      "\t* [ ] merged",
+      "\t* [ ] tested on INT",
+      ""
+    ],
+    "description": "generate a proto task"
+  },
+  "bug task": {
+    "prefix": "bugtask",
+    "body": [
+      "* [ ] $1",
+      "\t* [ ] investigation started",
+      "\t* [ ] investigation concluded",
+      "\t* [ ] started fix",
+      "\t* [ ] tested fix",
+      "\t* [ ] mr",
+      "\t* [ ] reviewed",
+      "\t* [ ] merged",
+      "\t* [ ] tested on INT",
+      ""
+    ],
+    "description": "generate a bug task"
   }
 }
