@@ -4,6 +4,7 @@
     "body": [
       "* [ ] $1",
       "\t* [ ] started",
+      "\t* [ ] design (actually spend time on what needs doing, even if super simple)",
       "\t* [ ] code",
       "\t* [ ] unit tests",
       "\t* [ ] mr",
@@ -19,11 +20,11 @@
     "body": [
       "* [ ] $1",
       "\t* [ ] started",
+      "\t* [ ] design (actually spend time on what needs doing, even if super simple)",
       "\t* [ ] define protos",
       "\t* [ ] mr",
       "\t* [ ] reviewed",
       "\t* [ ] merged",
-      "\t* [ ] tested on INT",
       ""
     ],
     "description": "generate a proto task"
@@ -34,6 +35,7 @@
       "* [ ] $1",
       "\t* [ ] investigation started",
       "\t* [ ] investigation concluded",
+      "\t* [ ] design (actually spend time on what needs doing, even if super simple)",
       "\t* [ ] started fix",
       "\t* [ ] tested fix",
       "\t* [ ] mr",

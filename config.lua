@@ -45,12 +45,8 @@ lvim.builtin.telescope.defaults.mappings = {
   },
 }
 
--- Change theme settings
--- lvim.builtin.theme.options.dim_inactive = true
--- lvim.builtin.theme.options.style = "storm"
-
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 -- lvim.builtin.which_key.mappings["t"] = {
 --   name = "+Trouble",
 --   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -62,7 +58,6 @@ lvim.builtin.telescope.defaults.mappings = {
 -- }
 --
 
--- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
@@ -70,6 +65,7 @@ lvim.builtin.terminal.active = true
 lvim.builtin.terminal.direction = "vertical"
 lvim.builtin.terminal.size = vim.o.columns * 0.4
 lvim.builtin.nvimtree.setup.view.side = "left"
+lvim.builtin.nvimtree.setup.view.width = 50
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -172,9 +168,10 @@ lvim.plugins = {
   { "leoluz/nvim-dap-go" },
   { "MattesGroeger/vim-bookmarks" },
   { "hrsh7th/cmp-emoji" },
+  { "folke/todo-comments.nvim" },
   { "morhetz/gruvbox" },
+  { "vim-test/vim-test" },
 }
-
 -- vimwiki
 vim.g.vimwiki_list = { { path = "~/vimwiki/", syntax = "markdown", ext = ".md" } }
 
@@ -182,7 +179,39 @@ vim.g.vimwiki_list = { { path = "~/vimwiki/", syntax = "markdown", ext = ".md" }
 -- https://github.com/leoluz/nvim-dap-go
 require("dap-go").setup()
 
-lvim.builtin.which_key.mappings["d"]["s"] = { "<cmd>lua require('dap-go').debug_test()<cr>", "Start" }
+lvim.builtin.which_key.mappings["d"] = {
+  name = "Debug",
+  t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+  b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
+  c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
+  C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
+  d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
+  g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
+  i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
+  o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
+  u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
+  p = { "<cmd>lua require'dap'.pause()<cr>", "Pause" },
+  r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
+  s = { "<cmd>lua require('dap-go').debug_test()<cr>", "Start" },
+  q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
+  U = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle UI" },
+}
+
+-- Todo
+require("todo-comments").setup()
+
+lvim.builtin.which_key.mappings["T"] = {
+  name = "Todo",
+  t = { "<cmd>TodoTelescope<cr>", "View todo's in telescope" },
+}
+
+-- Test
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Testing",
+  n = { "<cmd>TestNearest<cr>", "Nearest" },
+  f = { "<cmd>TestFile<cr>", "File" },
+  s = { "<cmd>TestSuite<cr>", "Suite" },
+}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- vim.api.nvim_create_autocmd("BufEnter", {
