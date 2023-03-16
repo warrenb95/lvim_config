@@ -11,7 +11,7 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = true
-lvim.colorscheme = "gruvbox"
+lvim.colorscheme = "monokai_soda"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 --
@@ -78,13 +78,11 @@ lvim.builtin.treesitter.ensure_installed = {
   "typescript",
   "tsx",
   "css",
-  "rust",
-  "java",
   "yaml",
   "go",
 }
 
-lvim.builtin.treesitter.ignore_install = { "haskell" }
+-- lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
 
 -- generic LSP settings
@@ -169,6 +167,7 @@ lvim.plugins = {
   { "MattesGroeger/vim-bookmarks" },
   { "hrsh7th/cmp-emoji" },
   { "morhetz/gruvbox" },
+  { "tanvirtin/monokai.nvim" },
   { "vim-test/vim-test" },
   { "folke/todo-comments.nvim" },
 }
@@ -280,11 +279,11 @@ lvim.builtin.which_key.mappings["t"] = {
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- vim.api.nvim_create_autocmd("BufEnter", {
---   pattern = { "*.json", "*.jsonc" },
---   -- enable wrap mode for json files only
---   command = "setlocal wrap",
--- })
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "diary.md" },
+  -- generate diary links
+  command = "VimwikiDiaryGenerateLinks",
+})
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = "zsh",
 --   callback = function()

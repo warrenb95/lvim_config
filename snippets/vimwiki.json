@@ -11,6 +11,23 @@
       "\t* [ ] reviewed",
       "\t* [ ] merged",
       "\t* [ ] tested on INT",
+      "\t* [ ] passing pipeline",
+      ""
+    ],
+    "description": "generate a coding task"
+  },
+  "rogue task": {
+    "prefix": "roguetask",
+    "body": [
+      "* [ ] $1",
+      "\t* [ ] started",
+      "\t* [ ] design (actually spend time on what needs doing, even if super simple)",
+      "\t* [ ] code suite setup",
+      "\t* [ ] code suite test cases",
+      "\t* [ ] mr",
+      "\t* [ ] reviewed",
+      "\t* [ ] merged",
+      "\t* [ ] passing pipeline",
       ""
     ],
     "description": "generate a coding task"
@@ -23,7 +40,8 @@
       "\t* [ ] design (actually spend time on what needs doing, even if super simple)",
       "\t* [ ] define protos",
       "\t* [ ] mr",
-      "\t* [ ] reviewed",
+      "\t* [ ] reviewed by team",
+      "\t* [ ] reviewed by api gods",
       "\t* [ ] merged",
       ""
     ],
@@ -37,11 +55,12 @@
       "\t* [ ] investigation concluded",
       "\t* [ ] design (actually spend time on what needs doing, even if super simple)",
       "\t* [ ] started fix",
-      "\t* [ ] tested fix",
+      "\t* [ ] completed fix",
       "\t* [ ] mr",
       "\t* [ ] reviewed",
       "\t* [ ] merged",
       "\t* [ ] tested on INT",
+      "\t* [ ] passing pipeline",
       ""
     ],
     "description": "generate a bug task"
