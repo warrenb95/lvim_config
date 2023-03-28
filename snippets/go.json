@@ -1,7 +1,14 @@
 {
   "generate test map": {
-    "prefix": "maptest",
+    "prefix": "testmap",
     "body": [
+      "import (",
+      "\t\"testing\"",
+      "",
+      "\t\"github.com/stretchr/testify/assert\"",
+      "\t\"github.com/stretchr/testify/require\"",
+      ")",
+      "",
       "func Test$1(t *testing.T) {",
       "\tt.Parallel()",
       "\t// Config",

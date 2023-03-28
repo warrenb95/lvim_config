@@ -2,7 +2,7 @@
   "code task": {
     "prefix": "codetask",
     "body": [
-      "* [ ] $1",
+      "* [ ] CODE: $1",
       "\t* [ ] started",
       "\t* [ ] design (actually spend time on what needs doing, even if super simple)",
       "\t* [ ] code",
@@ -19,7 +19,7 @@
   "rogue task": {
     "prefix": "roguetask",
     "body": [
-      "* [ ] $1",
+      "* [ ] ROGUE: $1",
       "\t* [ ] started",
       "\t* [ ] design (actually spend time on what needs doing, even if super simple)",
       "\t* [ ] code suite setup",
@@ -35,7 +35,7 @@
   "proto task": {
     "prefix": "prototask",
     "body": [
-      "* [ ] $1",
+      "* [ ] PROTO: $1",
       "\t* [ ] started",
       "\t* [ ] design (actually spend time on what needs doing, even if super simple)",
       "\t* [ ] define protos",
@@ -50,7 +50,7 @@
   "bug task": {
     "prefix": "bugtask",
     "body": [
-      "* [ ] $1",
+      "* [ ] 🐛 $1",
       "\t* [ ] investigation started",
       "\t* [ ] investigation concluded",
       "\t* [ ] design (actually spend time on what needs doing, even if super simple)",
