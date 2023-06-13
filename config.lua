@@ -9,20 +9,20 @@ an executable
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 -- colorscheme rotator
-local date = os.time()
-local day2year = 365.242            -- days in a year
-local sec2hour = 60 * 60            -- seconds in an hour
-local sec2day = sec2hour * 24       -- seconds in a day
-local sec2week = sec2day * 7
-local sec2year = sec2day * day2year -- seconds in a year
+-- local date = os.time()
+-- local day2year = 365.242            -- days in a year
+-- local sec2hour = 60 * 60            -- seconds in an hour
+-- local sec2day = sec2hour * 24       -- seconds in a day
+-- local sec2week = sec2day * 7
+-- local sec2year = sec2day * day2year -- seconds in a year
 -- week
-local week = date % sec2year / sec2week
-week = math.ceil(week)
-print(week)
+-- local week = date % sec2year / sec2week
+-- week = math.ceil(week)
 
-local colorschemeArray = { "monokai_soda", "gruvbox", "monokai", "tokyonight", "tokyonight-night" }
-local index = week % #colorschemeArray
-lvim.colorscheme = colorschemeArray[index + 1]
+-- local colorschemeArray = { "monokai_soda", "gruvbox", "monokai", "koehler", "elflord" }
+-- local index = week % #colorschemeArray
+-- lvim.colorscheme = colorschemeArray[index + 1]
+lvim.colorscheme = "koehler"
 
 -- general
 lvim.log.level = "warn"
@@ -81,6 +81,7 @@ lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
 lvim.builtin.terminal.direction = "vertical"
 lvim.builtin.terminal.size = vim.o.columns * 0.4
+-- lvim.builtin.terminal.shell = "/usr/local/bin/fish"
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.view.width = 50
 
