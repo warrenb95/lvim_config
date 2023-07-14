@@ -9,7 +9,7 @@ an executable
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 -- colorscheme rotator
--- local date = os.time()
+local date = os.time()
 -- local day2year = 365.242            -- days in a year
 -- local sec2hour = 60 * 60            -- seconds in an hour
 -- local sec2day = sec2hour * 24       -- seconds in a day
@@ -19,10 +19,11 @@ an executable
 -- local week = date % sec2year / sec2week
 -- week = math.ceil(week)
 
--- local colorschemeArray = { "monokai_soda", "gruvbox", "monokai", "koehler", "elflord" }
+local colorschemeArray = { "gruvbox", "monokai", "koehler", "elflord", "desert", "torte", "murphy" }
 -- local index = week % #colorschemeArray
--- lvim.colorscheme = colorschemeArray[index + 1]
-lvim.colorscheme = "koehler"
+local index = date % #colorschemeArray
+lvim.colorscheme = colorschemeArray[index + 1]
+-- lvim.colorscheme = "elflord"
 
 -- general
 lvim.log.level = "warn"
@@ -39,6 +40,10 @@ lvim.leader = "space"
 -- lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+vim.keymap.set("n", "/", function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require("telescope.builtin").current_buffer_fuzzy_find()
+end, { desc = "[/] Fuzzily search in current buffer]" })
 -- unmap a default keymapping
 -- vim.keymap.del("n", "<C-Up>")
 -- override a default keymapping
@@ -98,6 +103,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "css",
   "yaml",
   "go",
+  "proto",
 }
 
 -- lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -198,7 +204,20 @@ lvim.plugins = {
       require("spectre").setup()
     end,
   },
+  { "ray-x/lsp_signature.nvim" },
+  { "phaazon/hop.nvim" },
 }
+
+-- hop
+require "hop".setup({ keys = "asdfghjkl;" })
+lvim.builtin.which_key.mappings["h"] = {
+  name = "HOP",
+  h = { "<cmd>HopChar2<cr>", "HOP with 2 chars" },
+}
+
+-- lsp_signature
+local cfg = {} -- add your config here
+require "lsp_signature".setup(cfg)
 
 -- vimwiki
 vim.g.vimwiki_list = { { path = "~/vimwiki/", syntax = "markdown", ext = ".md" } }
@@ -313,8 +332,8 @@ lvim.builtin.which_key.mappings["t"] = {
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "diary.md" },
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "**/diary.md" },
   -- generate diary links
   command = "VimwikiDiaryGenerateLinks",
 })
