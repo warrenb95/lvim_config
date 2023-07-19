@@ -40,10 +40,6 @@ lvim.leader = "space"
 -- lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
-vim.keymap.set("n", "/", function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require("telescope.builtin").current_buffer_fuzzy_find()
-end, { desc = "[/] Fuzzily search in current buffer]" })
 -- unmap a default keymapping
 -- vim.keymap.del("n", "<C-Up>")
 -- override a default keymapping
@@ -103,7 +99,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "css",
   "yaml",
   "go",
-  "proto",
+  "buf",
 }
 
 -- lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -224,7 +220,7 @@ vim.g.vimwiki_list = { { path = "~/vimwiki/", syntax = "markdown", ext = ".md" }
 
 -- Debugger
 -- https://github.com/leoluz/nvim-dap-go
-require("dap-go").setup()
+require "dap-go".setup()
 
 lvim.builtin.which_key.mappings["d"] = {
   name = "Debug",
@@ -239,7 +235,7 @@ lvim.builtin.which_key.mappings["d"] = {
   u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
   p = { "<cmd>lua require'dap'.pause()<cr>", "Pause" },
   r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
-  s = { "<cmd>lua require('dap-go').debug_test()<cr>", "Start" },
+  s = { "<cmd>lua require'dap-go'.debug_test()<cr>", "Start" },
   q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
   U = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle UI" },
 }
