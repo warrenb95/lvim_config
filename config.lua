@@ -1,4 +1,3 @@
-
 -- colorscheme rotator
 local date = os.time()
 -- local day2year = 365.242            -- days in a year
@@ -10,7 +9,7 @@ local date = os.time()
 -- local week = date % sec2year / sec2week
 -- week = math.ceil(week)
 
-local colorschemeArray = { "gruvbox", "monokai", "koehler", "elflord", "desert", "torte", "murphy" }
+local colorschemeArray = { "gruvbox", "monokai", "elflord", "desert" }
 -- local index = week % #colorschemeArray
 local index = date % #colorschemeArray
 lvim.colorscheme = colorschemeArray[index + 1]
@@ -19,14 +18,47 @@ lvim.colorscheme = colorschemeArray[index + 1]
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = true
+vim.opt.colorcolumn = "100"
 --
 
-vim.opt.colorcolumn = "100"
+-- formatters
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { name = "goimports" },
+  -- { name = "golines" },
+  {
+    name = "markdown_toc",
+    filetypes = { "markdown", "vimwiki" },
+  },
+  {
+    name = "markdownlint",
+    filetypes = { "markdown", "vimwiki" },
+  },
+}
+--
+
+-- linters
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { name = "codespell" },
+  { name = "golangci_lint" },
+  {
+    name = "markdownlint",
+    filetypes = { "markdown", "vimwiki" },
+  },
+  { name = "protolint" }
+}
+--
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+-- Centers cursor when moving 1/2 page down
+lvim.keys.normal_mode["<C-d>"] = "<C-d>zz"
+-- Remap save key so we can use vimwiki default mappings
+lvim.builtin.which_key.mappings['w'] = {}
+lvim.builtin.which_key.mappings['W'] = { ":w<CR>", "Save" }
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -73,7 +105,6 @@ lvim.plugins = {
   { "vimwiki/vimwiki" },
   { "leoluz/nvim-dap-go" },
   { "MattesGroeger/vim-bookmarks" },
-  { "hrsh7th/cmp-emoji" },
   { "morhetz/gruvbox" },
   { "tanvirtin/monokai.nvim" },
   { "vim-test/vim-test" },
@@ -90,10 +121,12 @@ lvim.plugins = {
   },
   { "ray-x/lsp_signature.nvim" },
   { "phaazon/hop.nvim" },
+  { "buoto/gotests-vim" },
+  { "ryanoasis/vim-devicons" },
 }
 
 -- hop
-require "hop".setup({ keys = "asdfghjkl;" })
+require "hop".setup({ keys = "asdfjkl;" })
 lvim.builtin.which_key.mappings["h"] = {
   name = "HOP",
   h = { "<cmd>HopChar2<cr>", "HOP with 2 chars" },
@@ -156,4 +189,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
   -- generate diary links
   command = "VimwikiDiaryGenerateLinks",
 })
-

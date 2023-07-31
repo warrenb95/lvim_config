@@ -72,5 +72,24 @@
       ""
     ],
     "description": "generate a go test map"
+  },
+  "if err": {
+    "prefix": "iferr",
+    "body": [
+      "if err != nil {",
+      "\t// TODO: log and handle error",
+      "}",
+      ""
+    ]
+    "description": "generate if err handler"
+  },
+  "todo": {
+    "prefix": "tt",
+    "body": [
+      "",
+      "// TODO: $1",
+      ""
+    ]
+    "description": "generate a todo comment"
   }
 }
