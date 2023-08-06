@@ -25,7 +25,7 @@ vim.opt.colorcolumn = "100"
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { name = "goimports" },
-  -- { name = "golines" },
+  { name = "fixjson" },
   {
     name = "markdown_toc",
     filetypes = { "markdown", "vimwiki" },
@@ -42,6 +42,7 @@ local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { name = "codespell" },
   { name = "golangci_lint" },
+  { name = "jsonling" },
   {
     name = "markdownlint",
     filetypes = { "markdown", "vimwiki" },

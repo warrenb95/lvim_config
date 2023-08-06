@@ -80,7 +80,7 @@
       "\t// TODO: log and handle error",
       "}",
       ""
-    ]
+    ],
     "description": "generate if err handler"
   },
   "todo": {
@@ -89,7 +89,7 @@
       "",
       "// TODO: $1",
       ""
-    ]
+    ],
     "description": "generate a todo comment"
   }
 }
