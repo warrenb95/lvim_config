@@ -9,7 +9,7 @@ local date = os.time()
 -- local week = date % sec2year / sec2week
 -- week = math.ceil(week)
 
-local colorschemeArray = { "gruvbox", "monokai", "elflord", "desert" }
+local colorschemeArray = { "gruvbox", "monokai_soda", "slate", "desert", "tokyonight", "tokyonight-storm" }
 -- local index = week % #colorschemeArray
 local index = date % #colorschemeArray
 lvim.colorscheme = colorschemeArray[index + 1]
@@ -34,6 +34,10 @@ formatters.setup {
     name = "markdownlint",
     filetypes = { "markdown", "vimwiki" },
   },
+  {
+    name = "sql_formatter",
+    args = { "-c", "sql_formatter_config.json" },
+  }
 }
 --
 
@@ -41,13 +45,18 @@ formatters.setup {
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { name = "codespell" },
+  { name = "jsonlint" },
   { name = "golangci_lint" },
   { name = "jsonling" },
   {
     name = "markdownlint",
     filetypes = { "markdown", "vimwiki" },
   },
-  { name = "protolint" }
+  { name = "protolint" },
+  {
+    name = "sqlfluff",
+    args = { "--dialect", "postgres" },
+  }
 }
 --
 
@@ -108,6 +117,7 @@ lvim.plugins = {
   { "MattesGroeger/vim-bookmarks" },
   { "morhetz/gruvbox" },
   { "tanvirtin/monokai.nvim" },
+  { "folke/tokyonight.nvim" },
   { "vim-test/vim-test" },
   { "folke/todo-comments.nvim" },
   { "tyru/open-browser.vim" },
@@ -124,6 +134,9 @@ lvim.plugins = {
   { "phaazon/hop.nvim" },
   { "buoto/gotests-vim" },
   { "ryanoasis/vim-devicons" },
+  { "MunifTanjim/nui.nvim" },
+  { "rcarriga/nvim-notify" },
+  { "folke/noice.nvim" },
 }
 
 -- hop
@@ -189,4 +202,23 @@ vim.api.nvim_create_autocmd("BufEnter", {
   pattern = { "**/diary.md" },
   -- generate diary links
   command = "VimwikiDiaryGenerateLinks",
+})
+
+-- noice
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true,
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    command_palette = true,       -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false,       -- add a border to hover docs and signature help
+  },
 })
