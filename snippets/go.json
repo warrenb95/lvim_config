@@ -1,6 +1,6 @@
 {
   "generate test map": {
-    "prefix": "testmap",
+    "prefix": "gotest",
     "body": [
       "import (",
       "\t\"testing\"",
@@ -37,10 +37,10 @@
       "}",
       ""
     ],
-    "description": "generate a test map"
+    "description": "generate a go test"
   },
-  "generate go test map": {
-    "prefix": "gotest",
+  "generate go test function": {
+    "prefix": "testfun",
     "body": [
       "",
       "func Test$1(t *testing.T) {",
@@ -71,13 +71,13 @@
       "}",
       ""
     ],
-    "description": "generate a go test map"
+    "description": "generate a go test function"
   },
   "if err": {
     "prefix": "iferr",
     "body": [
       "if err != nil {",
-      "\t// TODO: log and handle error",
+      "\tlogger.WithError(err).Warn(\"$1\")",
       "}",
       ""
     ],
@@ -91,5 +91,19 @@
       ""
     ],
     "description": "generate a todo comment"
+  },
+  "return err": {
+    "prefix": "reer",
+    "body": [
+      "return err"
+    ],
+    "description": "return an error"
+  },
+  "return nil": {
+    "prefix": "rnil",
+    "body": [
+      "return nil"
+    ],
+    "description": "return nil"
   }
 }

@@ -1,5 +1,5 @@
 -- colorscheme rotator
-local date = os.time()
+-- local date = os.time()
 -- local day2year = 365.242            -- days in a year
 -- local sec2hour = 60 * 60            -- seconds in an hour
 -- local sec2day = sec2hour * 24       -- seconds in a day
@@ -9,16 +9,16 @@ local date = os.time()
 -- local week = date % sec2year / sec2week
 -- week = math.ceil(week)
 
-local colorschemeArray = { "gruvbox", "monokai_soda", "slate", "desert", "tokyonight", "tokyonight-storm" }
+-- local colorschemeArray = { "gruvbox", "monokai_soda", "slate", "aurora" }
 -- local index = week % #colorschemeArray
-local index = date % #colorschemeArray
-lvim.colorscheme = colorschemeArray[index + 1]
--- lvim.colorscheme = "elflord"
+-- local index = date % #colorschemeArray
+-- lvim.colorscheme = colorschemeArray[index + 1]
+lvim.colorscheme = "aurora"
 
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = true
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = "120"
 --
 
 -- formatters
@@ -34,10 +34,8 @@ formatters.setup {
     name = "markdownlint",
     filetypes = { "markdown", "vimwiki" },
   },
-  {
-    name = "sql_formatter",
-    args = { "-c", "sql_formatter_config.json" },
-  }
+  { name = "sqlfmt" },
+  { name = "buf" },
 }
 --
 
@@ -47,16 +45,11 @@ linters.setup {
   { name = "codespell" },
   { name = "jsonlint" },
   { name = "golangci_lint" },
-  { name = "jsonling" },
   {
     name = "markdownlint",
     filetypes = { "markdown", "vimwiki" },
   },
-  { name = "protolint" },
-  {
-    name = "sqlfluff",
-    args = { "--dialect", "postgres" },
-  }
+  { name = "buf" },
 }
 --
 
@@ -108,6 +101,8 @@ lvim.builtin.treesitter.ensure_installed = {
   "lua",
   "yaml",
   "go",
+  "sql",
+  "proto",
 }
 
 -- Additional Plugins
@@ -115,9 +110,8 @@ lvim.plugins = {
   { "vimwiki/vimwiki" },
   { "leoluz/nvim-dap-go" },
   { "MattesGroeger/vim-bookmarks" },
-  { "morhetz/gruvbox" },
-  { "tanvirtin/monokai.nvim" },
-  { "folke/tokyonight.nvim" },
+  -- { "morhetz/gruvbox" },
+  -- { "tanvirtin/monokai.nvim" },
   { "vim-test/vim-test" },
   { "folke/todo-comments.nvim" },
   { "tyru/open-browser.vim" },
@@ -132,11 +126,8 @@ lvim.plugins = {
   },
   { "ray-x/lsp_signature.nvim" },
   { "phaazon/hop.nvim" },
-  { "buoto/gotests-vim" },
   { "ryanoasis/vim-devicons" },
-  { "MunifTanjim/nui.nvim" },
-  { "rcarriga/nvim-notify" },
-  { "folke/noice.nvim" },
+  { "ray-x/aurora" },
 }
 
 -- hop
@@ -189,6 +180,8 @@ lvim.builtin.which_key.mappings["T"] = {
   T = { "<cmd>TodoTelescope<cr>", "View todo's in telescope" },
 }
 
+
+
 -- Test
 lvim.builtin.which_key.mappings["t"] = {
   name = "Testing",
@@ -202,23 +195,4 @@ vim.api.nvim_create_autocmd("BufEnter", {
   pattern = { "**/diary.md" },
   -- generate diary links
   command = "VimwikiDiaryGenerateLinks",
-})
-
--- noice
-require("noice").setup({
-  lsp = {
-    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true,
-    },
-  },
-  -- you can enable a preset for easier configuration
-  presets = {
-    command_palette = true,       -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false,       -- add a border to hover docs and signature help
-  },
 })
