@@ -14,6 +14,9 @@
 -- local index = date % #colorschemeArray
 -- lvim.colorscheme = colorschemeArray[index + 1]
 lvim.colorscheme = "aurora"
+vim.g.aurora_transparent = 1
+vim.g.aurora_bold = 1
+vim.g.aurora_darker = 1
 
 -- general
 lvim.log.level = "warn"
@@ -110,8 +113,6 @@ lvim.plugins = {
   { "vimwiki/vimwiki" },
   { "leoluz/nvim-dap-go" },
   { "MattesGroeger/vim-bookmarks" },
-  -- { "morhetz/gruvbox" },
-  -- { "tanvirtin/monokai.nvim" },
   { "vim-test/vim-test" },
   { "folke/todo-comments.nvim" },
   { "tyru/open-browser.vim" },
