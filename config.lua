@@ -65,6 +65,19 @@ lvim.keys.normal_mode["<C-d>"] = "<C-d>zz"
 -- Remap save key so we can use vimwiki default mappings
 lvim.builtin.which_key.mappings['w'] = {}
 lvim.builtin.which_key.mappings['W'] = { ":w<CR>", "Save" }
+-- Remap LSP keys to use goto-preview as default
+lvim.lsp.buffer_mappings.normal_mode['gpd'] = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+  "Show documentation" }
+lvim.lsp.buffer_mappings.normal_mode['gpi'] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>",
+  "Show implementation" }
+lvim.lsp.buffer_mappings.normal_mode['gpc'] = { "<cmd>lua require('goto-preview').close_all_win()<CR>",
+  "Close all windows" }
+lvim.lsp.buffer_mappings.normal_mode['<C-k>'] = { "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",
+  "Show type definition" }
+lvim.lsp.buffer_mappings.normal_mode['gpr'] = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>",
+  "Show references" }
+
+
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -129,6 +142,30 @@ lvim.plugins = {
   { "phaazon/hop.nvim" },
   { "ryanoasis/vim-devicons" },
   { "ray-x/aurora" },
+  {
+    'wfxr/minimap.vim',
+    -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
+    config = function()
+      vim.cmd("let g:minimap_width = 10")
+      vim.cmd("let g:minimap_auto_start = 1")
+      vim.cmd("let g:minimap_auto_start_win_enter = 1")
+    end,
+  },
+  {
+    "rmagatti/goto-preview",
+    config = function()
+      require('goto-preview').setup {
+        width = 120,             -- Width of the floating window
+        height = 40,             -- Height of the floating window
+        default_mappings = true, -- Bind default mappings
+        debug = false,           -- Print debug information
+        opacity = nil,           -- 0-100 opacity level of the floating window where 100 is fully transparent.
+        post_open_hook = nil     -- A function taking two arguments, a buffer and a window to be ran as a hook.
+        -- You can use "default_mappings = true" setup option
+        -- Or explicitly set keybindings
+      }
+    end
+  },
 }
 
 -- hop
@@ -197,3 +234,5 @@ vim.api.nvim_create_autocmd("BufEnter", {
   -- generate diary links
   command = "VimwikiDiaryGenerateLinks",
 })
+
+-- goto-preview
