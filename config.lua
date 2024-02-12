@@ -1,25 +1,24 @@
 -- colorscheme rotator
--- local date = os.time()
--- local day2year = 365.242            -- days in a year
--- local sec2hour = 60 * 60            -- seconds in an hour
--- local sec2day = sec2hour * 24       -- seconds in a day
--- local sec2week = sec2day * 7
--- local sec2year = sec2day * day2year -- seconds in a year
+local time = os.time()
+local day2year = 365.242            -- days in a year
+local sec2hour = 60 * 60            -- seconds in an hour
+local sec2day = sec2hour * 24       -- seconds in a day
+local sec2week = sec2day * 7
+local sec2year = sec2day * day2year -- seconds in a year
 -- week
--- local week = date % sec2year / sec2week
--- week = math.ceil(week)
+local week = time % sec2year / sec2week
+week = math.ceil(week)
 
--- local colorschemeArray = { "gruvbox", "monokai_soda", "slate", "aurora" }
--- local index = week % #colorschemeArray
--- local index = date % #colorschemeArray
--- lvim.colorscheme = colorschemeArray[index + 1]
-lvim.colorscheme = "aurora"
-vim.g.aurora_transparent = 1
-vim.g.aurora_bold = 1
-vim.g.aurora_darker = 1
+local colorschemeArray = { "gruvbox", "monokai_soda", "slate", "aurora" }
+local index = week % #colorschemeArray
+-- local index = time % #colorschemeArray
+lvim.colorscheme = colorschemeArray[index + 1]
+-- lvim.colorscheme = "aurora"
+-- vim.g.aurora_transparent = 1
+-- vim.g.aurora_bold = 1
+-- vim.g.aurora_darker = 1
 
 -- general
-lvim.log.level = "warn"
 lvim.format_on_save.enabled = true
 vim.opt.colorcolumn = "120"
 --
@@ -65,19 +64,6 @@ lvim.keys.normal_mode["<C-d>"] = "<C-d>zz"
 -- Remap save key so we can use vimwiki default mappings
 lvim.builtin.which_key.mappings['w'] = {}
 lvim.builtin.which_key.mappings['W'] = { ":w<CR>", "Save" }
--- Remap LSP keys to use goto-preview as default
-lvim.lsp.buffer_mappings.normal_mode['gpd'] = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
-  "Show documentation" }
-lvim.lsp.buffer_mappings.normal_mode['gpi'] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>",
-  "Show implementation" }
-lvim.lsp.buffer_mappings.normal_mode['gpc'] = { "<cmd>lua require('goto-preview').close_all_win()<CR>",
-  "Close all windows" }
-lvim.lsp.buffer_mappings.normal_mode['<C-k>'] = { "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",
-  "Show type definition" }
-lvim.lsp.buffer_mappings.normal_mode['gpr'] = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>",
-  "Show references" }
-
-
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -141,32 +127,16 @@ lvim.plugins = {
   { "ray-x/lsp_signature.nvim" },
   { "phaazon/hop.nvim" },
   { "ryanoasis/vim-devicons" },
+
+  -- colorschemes
   { "ray-x/aurora" },
-  {
-    'wfxr/minimap.vim',
-    -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
-    config = function()
-      vim.cmd("let g:minimap_width = 10")
-      vim.cmd("let g:minimap_auto_start = 1")
-      vim.cmd("let g:minimap_auto_start_win_enter = 1")
-    end,
-  },
-  {
-    "rmagatti/goto-preview",
-    config = function()
-      require('goto-preview').setup {
-        width = 120,             -- Width of the floating window
-        height = 40,             -- Height of the floating window
-        default_mappings = true, -- Bind default mappings
-        debug = false,           -- Print debug information
-        opacity = nil,           -- 0-100 opacity level of the floating window where 100 is fully transparent.
-        post_open_hook = nil     -- A function taking two arguments, a buffer and a window to be ran as a hook.
-        -- You can use "default_mappings = true" setup option
-        -- Or explicitly set keybindings
-      }
-    end
-  },
+  { "ellisonleao/gruvbox.nvim" },
+  { "tanvirtin/monokai.nvim" },
 }
+
+-- bookmarks
+vim.g.bookmark_save_per_working_dir = 1
+vim.g.bookmark_auto_save = 1
 
 -- hop
 require "hop".setup({ keys = "asdfjkl;" })
@@ -235,4 +205,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
   command = "VimwikiDiaryGenerateLinks",
 })
 
--- goto-preview
+-- telescope ignore vendor file
+lvim.builtin.telescope.defaults.file_ignore_patterns = {
+  "vendor",
+}
