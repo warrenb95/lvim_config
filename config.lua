@@ -9,7 +9,7 @@ local sec2year = sec2day * day2year -- seconds in a year
 local week = time % sec2year / sec2week
 week = math.ceil(week)
 
-local colorschemeArray = { "gruvbox", "monokai_soda", "slate", "aurora" }
+local colorschemeArray = { "gruvbox", "monokai_soda", "slate", "aurora", "everforest", "sonokai", "tokyonight-vim" }
 local index = week % #colorschemeArray
 -- local index = time % #colorschemeArray
 lvim.colorscheme = colorschemeArray[index + 1]
@@ -132,6 +132,9 @@ lvim.plugins = {
   { "ray-x/aurora" },
   { "ellisonleao/gruvbox.nvim" },
   { "tanvirtin/monokai.nvim" },
+  { "sainnhe/everforest" },
+  { "sainnhe/sonokai" },
+  { "ghifarit53/tokyonight-vim" },
 }
 
 -- bookmarks
