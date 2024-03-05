@@ -1,3 +1,9 @@
+-- general
+lvim.format_on_save.enabled = true
+vim.opt.colorcolumn = "120"
+vim.opt.background = "dark"
+--
+--
 -- colorscheme rotator
 local time = os.time()
 local day2year = 365.242            -- days in a year
@@ -9,19 +15,11 @@ local sec2year = sec2day * day2year -- seconds in a year
 local week = time % sec2year / sec2week
 week = math.ceil(week)
 
-local colorschemeArray = { "gruvbox", "monokai_soda", "slate", "aurora", "everforest", "sonokai", "tokyonight-vim" }
+local colorschemeArray = { "gruvbox", "monokai_soda", "slate", "aurora", "everforest", "sonokai", "tokyonight-vim",
+  "molokai", "PaperColor" }
 local index = week % #colorschemeArray
--- local index = time % #colorschemeArray
 lvim.colorscheme = colorschemeArray[index + 1]
--- lvim.colorscheme = "aurora"
--- vim.g.aurora_transparent = 1
--- vim.g.aurora_bold = 1
--- vim.g.aurora_darker = 1
 
--- general
-lvim.format_on_save.enabled = true
-vim.opt.colorcolumn = "120"
---
 
 -- formatters
 local formatters = require "lvim.lsp.null-ls.formatters"
@@ -135,6 +133,8 @@ lvim.plugins = {
   { "sainnhe/everforest" },
   { "sainnhe/sonokai" },
   { "ghifarit53/tokyonight-vim" },
+  { "tomasr/molokai" },
+  { "NLKNguyen/papercolor-theme" },
 }
 
 -- bookmarks
