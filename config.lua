@@ -59,9 +59,6 @@ lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- Centers cursor when moving 1/2 page down
 lvim.keys.normal_mode["<C-d>"] = "<C-d>zz"
--- Remap save key so we can use vimwiki default mappings
-lvim.builtin.which_key.mappings['w'] = {}
-lvim.builtin.which_key.mappings['W'] = { ":w<CR>", "Save" }
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -107,7 +104,6 @@ lvim.builtin.treesitter.ensure_installed = {
 
 -- Additional Plugins
 lvim.plugins = {
-  { "vimwiki/vimwiki" },
   { "leoluz/nvim-dap-go" },
   { "MattesGroeger/vim-bookmarks" },
   { "vim-test/vim-test" },
